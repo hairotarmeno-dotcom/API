@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Diputados Lima Metropolitana</title>
+    <link rel="stylesheet" href="diputados.css">
+</head>
+<body>
+    <div class="logo-onpe">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQciM-hhfMu2rZwVIHWDBEOoxK3gbAJfnxZCA&s" alt="Logo ONPE">
+    </div>
+<header>
+    <h1>Cédula de Sufragio Virtual</h1>
+    <p>Elección de Diputados - Lima Metropolitana</p>
+    <p id="datosVotante"></p>
+</header>
+
+<main>
+
+    <section class="bloque">
+        <h2>Diputados Lima Metropolitana</h2>
+        <p class="indicacion">
+            Seleccione un partido político. Opcionalmente puede ingresar hasta dos votos preferenciales.
+        </p>
+
+        <div id="listaDiputados" class="contenedor-opciones"></div>
+    </section>
+
+    <button id="btnConfirmar">Confirmar voto</button>
+    <button id="btnSiguiente" style="display: none;">Siguiente</button>
+
+    <p id="mensaje"></p>
+
+</main>
+
+<script src="diputados.js"></script>
+</body>
+</html>

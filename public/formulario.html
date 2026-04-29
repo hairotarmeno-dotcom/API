@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Registro de Votante</title>
+    <link rel="stylesheet" href="formulario.css">
+</head>
+
+<body>
+
+    <video autoplay muted loop id="videoFondo">
+        <source src="Video/fondo.webm" type="video/webm">
+        <source src="Video/fondo.mp4" type="video/mp4">
+    </video>
+
+    <div class="overlay"></div>
+
+    <div class="contenido">
+
+        <h1 class="titulo">Bienvenido al Sistema de Votación</h1>
+
+        <div class="contenedor">
+            <div class="logo-onpe">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQciM-hhfMu2rZwVIHWDBEOoxK3gbAJfnxZCA&s" alt="Logo ONPE">
+            </div>
+
+            <div class="formulario">
+                <h2>Registro de Votante</h2>
+
+                <form id="formRegistro">
+                    <input type="number" id="dni" placeholder="DNI (8 dígitos)" oninput="this.value = this.value.slice(0,8)">
+                    <input type="text" id="nombre" placeholder="Nombre">
+                    <input type="text" id="apellidoP" placeholder="Apellido Paterno">
+                    <input type="text" id="apellidoM" placeholder="Apellido Materno">
+                    <input type="number" id="grupo" placeholder="Grupo de Votación" oninput="this.value = this.value.slice(0,6)">
+                    <button type="submit">Continuar a Presidente y Vicepresidentes</button>
+                </form>
+
+                <div class="mensaje" id="mensaje"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="formulario.js"></script>
+
+</body>
+</html>

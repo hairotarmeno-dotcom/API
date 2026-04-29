@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Parlamento Andino</title>
+    <link rel="stylesheet" href="parlamento.css">
+</head>
+<body>
+    <div class="logo-onpe">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQciM-hhfMu2rZwVIHWDBEOoxK3gbAJfnxZCA&s" alt="Logo ONPE">
+    </div>
+<header>
+    <h1>Cédula de Sufragio Virtual</h1>
+    <p>Elección de Representantes ante el Parlamento Andino</p>
+    <p id="datosVotante"></p>
+</header>
+
+<main>
+
+    <section class="bloque parlamento">
+        <h2>Parlamento Andino</h2>
+
+        <p class="indicacion">
+            Seleccione un partido político. Opcionalmente puede ingresar hasta dos votos preferenciales.
+        </p>
+
+        <div id="listaParlamento" class="contenedor-opciones"></div>
+    </section>
+
+    <button id="btnConfirmar">Confirmar voto</button>
+    <button id="btnSiguiente" style="display: none;">Finalizar</button>
+
+    <p id="mensaje"></p>
+
+</main>
+
+<script src="parlamento.js"></script>
+</body>
+</html>

@@ -1,0 +1,152 @@
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #80d3e7, #ffffff);
+    margin: 0;
+}
+
+.logo-onpe {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+.logo-onpe img {
+    width: 100px;
+    padding: 15px;
+    background: #f5f5f5;
+    border-radius: 12px;
+}
+
+header {
+    text-align: center;
+    padding: 25px;
+    background: white;
+    box-shadow: 0 0 12px rgba(0,0,0,0.2);
+}
+
+header h1 {
+    color: #3d85d8;
+    margin-bottom: 5px;
+}
+
+main {
+    width: 95%;
+    max-width: 1200px;
+    margin: 25px auto;
+}
+
+.bloque {
+    background: rgba(255,255,255,0.75);
+    padding: 18px;
+    border-radius: 15px;
+    margin-bottom: 25px;
+}
+
+.bloque h2 {
+    color: #3d85d8;
+    text-align: center;
+}
+
+.contenedor-opciones {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+.opcion {
+    display: grid;
+    grid-template-columns: 55px 1fr 35px;
+    align-items: center;
+    background: white;
+    padding: 10px;
+    border: 2px solid #ccc;
+    border-radius: 12px;
+    cursor: pointer;
+    box-shadow: 0 0 8px rgba(0,0,0,0.15);
+}
+
+.opcion:hover {
+    border-color: #65ceee;
+}
+
+.opcion.seleccionado {
+    border-color: #3d85d8;
+    background: #e8f5ff;
+}
+
+.logo {
+    width: 45px;
+    height: 45px;
+    object-fit: contain;
+}
+
+.info h3 {
+    margin: 0;
+    font-size: 13px;
+    color: #3d85d8;
+}
+
+.info p {
+    margin: 3px 0;
+    font-size: 12px;
+}
+
+input[type="radio"] {
+    width: 20px;
+    height: 20px;
+}
+
+.preferencial {
+    margin-top: 5px;
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+
+.preferencial input {
+    width: 50px;
+    padding: 4px;
+}
+
+.voto-blanco {
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    min-height: 65px;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 15px;
+    background: #4eb4e3;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background: #058bb4;
+}
+
+#mensaje {
+    text-align: center;
+    font-weight: bold;
+    margin-top: 15px;
+}
+
+@media (max-width: 900px) {
+    .contenedor-opciones {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .contenedor-opciones {
+        grid-template-columns: 1fr;
+    }
+}

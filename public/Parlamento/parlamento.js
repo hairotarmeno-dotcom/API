@@ -1,0 +1,187 @@
+const votante = JSON.parse(localStorage.getItem("votante"));
+
+if (!votante) {
+    window.location.href = "../formulario.html";
+}
+
+document.getElementById("datosVotante").textContent =
+    `Votante: ${votante.nombre} ${votante.apellidoP} ${votante.apellidoM} | DNI: ${votante.dni}`;
+
+const listaParlamento = document.getElementById("listaParlamento");
+const btnConfirmar = document.getElementById("btnConfirmar");
+const btnSiguiente = document.getElementById("btnSiguiente");
+const mensaje = document.getElementById("mensaje");
+
+let parlamentoSeleccionado = null;
+let tarjetaSeleccionada = null;
+
+const partidosParlamento = [
+  { 
+    id: 1,
+    partido: "Ahora Nación - AN",
+    logo: "../img_partido/candidato1.jpg"
+  },
+  {
+    id: 2,
+    partido: "Partido Cívico Obras",
+    logo: "../img_partido/candidato2.jpg"
+  },
+  { 
+    id: 3,
+    partido: "Partido del Buen Gobierno",
+    logo: "../img_partido/candidato3.jpg"
+  },
+  {
+    id: 4,
+    partido: "Partido Político Integridad Democrática",
+    logo: "../img_partido/candidato4.jpg"
+  },
+  {
+    id: 5,
+    partido: "Partido Sicreo",
+    logo: "../img_partido/candidato5.jpg"
+  },
+  {
+    id: 6,
+    partido: "Partido Frente de la Esperanza 2021",
+    logo: "../img_partido/candidato6.jpg"
+  },
+  {
+    id: 7,
+    partido: "Renovación Popular",
+    logo: "../img_partido/candidato7.jpg"
+  },
+  {
+    id: 8,
+    partido: "Fuerza Popular",
+    logo: "../img_partido/candidato8.jpg"
+  },
+  {
+    id: 9,
+    partido: "Alianza para el Progreso",
+    logo: "../img_partido/candidato9.jpg"
+  },
+  {
+    id: 10,
+    partido: "Fe en el Perú",
+    logo: "../img_partido/candidato10.jpg"
+  },
+  {
+    id: 11,
+    partido: "Avanza País - Partido de Integración Social",
+    logo: "../img_partido/candidato11.jpg"
+  },
+  {
+    id: 12,
+    partido: "Partido Aprista Peruano",
+    logo: "../img_partido/candidato12.jpg"
+  },
+  {
+    id: 13,
+    partido: "Partido País para Todos",
+    logo: "../img_partido/candidato13.jpg"
+  },
+  {
+    id: 14,
+    partido: "Primero la Gente - Comunidad, Ecología, Libertad y Progreso",
+    logo: "../img_partido/candidato14.jpg"
+  },
+  {
+    id: 16,
+    partido: "Voto en blanco",
+    tipo: "blanco"
+  }
+];
+
+partidosParlamento.forEach(opcion => {
+    const tarjeta = document.createElement("div");
+    tarjeta.classList.add("opcion");
+
+    if (opcion.tipo === "blanco") {
+        tarjeta.classList.add("voto-blanco");
+
+        tarjeta.innerHTML = `
+            <span>VOTO EN BLANCO</span>
+            <input type="radio" name="parlamento" value="${opcion.id}">
+        `;
+    } else {
+        tarjeta.innerHTML = `
+            <img src="${opcion.logo}" class="logo" alt="Logo del partido">
+
+            <div class="info">
+                <h3>${opcion.partido}</h3>
+
+                <div class="preferencial">
+                    <label>Pref. 1:</label>
+                    <input type="number" min="1" max="99">
+
+                    <label>Pref. 2:</label>
+                    <input type="number" min="1" max="99">
+                </div>
+            </div>
+
+            <input type="radio" name="parlamento" value="${opcion.id}">
+        `;
+    }
+
+    tarjeta.addEventListener("click", () => {
+        parlamentoSeleccionado = opcion;
+        tarjetaSeleccionada = tarjeta;
+
+        document.querySelectorAll("input[name='parlamento']").forEach(radio => {
+            radio.closest(".opcion").classList.remove("seleccionado");
+        });
+
+        tarjeta.classList.add("seleccionado");
+        tarjeta.querySelector("input[type='radio']").checked = true;
+    });
+
+    listaParlamento.appendChild(tarjeta);
+});
+
+btnConfirmar.addEventListener("click", () => {
+    if (!tarjetaSeleccionada) {
+        mensaje.textContent = "Debes seleccionar un partido.";
+        mensaje.style.color = "red";
+        return;
+    }
+
+    const inputs = tarjetaSeleccionada.querySelectorAll("input[type='number']");
+    const pref1 = inputs[0] ? inputs[0].value : "";
+    const pref2 = inputs[1] ? inputs[1].value : "";
+
+    if (pref1 && pref2 && pref1 === pref2) {
+        mensaje.textContent = "No puedes repetir números preferenciales.";
+        mensaje.style.color = "red";
+        return;
+    }
+
+    const votoParlamento = {
+        dni: votante.dni,
+        nombre: `${votante.nombre} ${votante.apellidoP} ${votante.apellidoM}`,
+        grupo: votante.grupo,
+        partido: parlamentoSeleccionado,
+        preferencial: [pref1, pref2],
+        fecha: new Date().toLocaleString()
+    };
+
+    localStorage.setItem("votoParlamento", JSON.stringify(votoParlamento));
+
+    mensaje.textContent = "Voto de Parlamento Andino registrado correctamente.";
+    mensaje.style.color = "green";
+
+    document.querySelectorAll("input").forEach(input => {
+        input.disabled = true;
+    });
+
+    document.querySelectorAll(".opcion").forEach(card => {
+        card.style.pointerEvents = "none";
+    });
+
+    btnConfirmar.style.display = "none";
+    btnSiguiente.style.display = "block";
+});
+
+btnSiguiente.addEventListener("click", () => {
+    window.location.href = "../Final/final.html";
+});

@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/9376316e-2d40-4bc4-ae02-d4581f9277fd/resourceGroups/appsvc_linux_brazilsouth/providers/Microsoft.Web/sites/cedula-votacion-2026",
+    "appService.deploySubpath": "."
+}

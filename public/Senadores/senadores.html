@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Senadores</title>
+    <link rel="stylesheet" href="senadores.css">
+</head>
+<body>
+    <div class="logo-onpe">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQciM-hhfMu2rZwVIHWDBEOoxK3gbAJfnxZCA&s" alt="Logo ONPE">
+    </div>
+    <header>
+        <h1>Cédula de Sufragio Virtual</h1>
+        <p>Elección de Senadores</p>
+        <p id="datosVotante"></p>
+    </header>
+
+<main>
+
+    <section class="bloque">
+        <h2>Senadores - A Nivel Nacional</h2>
+        <div id="listaNacional" class="contenedor-opciones"></div>
+    </section>
+
+    <section class="bloque">
+        <h2>Senadores - Lima Metropolitana</h2>
+        <div id="listaLima" class="contenedor-opciones"></div>
+    </section>
+
+    <button id="btnConfirmar">Confirmar votos</button>
+    <button id="btnSiguiente" style="display: none;">Siguiente</button>
+
+    <p id="mensaje"></p>
+
+</main>
+
+<script src="senadores.js"></script>
+</body>
+</html>
