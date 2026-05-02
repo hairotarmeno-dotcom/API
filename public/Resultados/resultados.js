@@ -11,7 +11,9 @@ async function cargarResultados(){
         const respuestaVotantes=await fetch("/api/votantes");
         const votantes=await respuestaVotantes.json();
         mostrarVotantes(votantes);
-    }catch(error){alert("No se pudieron cargar los resultados")}
+    }catch (error) {
+        console.error("ERROR REAL:", error);
+    }
 }
 function crearGrafico(idCanvas,datos){
     const etiquetas=datos.map(item=>item.nombre);
