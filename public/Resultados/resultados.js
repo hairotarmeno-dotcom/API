@@ -29,3 +29,4 @@ function mostrarVotantes(votantes){
     });
 }
 cargarResultados();
+setInterval(cargarResultados, 5000);

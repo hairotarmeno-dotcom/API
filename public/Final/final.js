@@ -105,7 +105,7 @@ btnFinalizar.addEventListener("click", async () => {
             return;
         }
 
-        alert("Voto guardado correctamente en MongoDB.");
+        alert("Voto guardado correctamente. ¡Gracias por participar!");
 
         localStorage.clear();
         window.location.href = "../formulario.html";
