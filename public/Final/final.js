@@ -78,7 +78,40 @@ if (votoParlamento) {
     );
 }
 
-btnFinalizar.addEventListener("click", () => {
-    localStorage.clear();
-    window.location.href = "../formulario.html";
+btnFinalizar.addEventListener("click", async () => {
+    const votoCompleto = {
+        votante: votante,
+        votos: {
+            presidente: votoPresidencial,
+            senadores: votoSenadores,
+            diputados: votoDiputados,
+            parlamento: votoParlamento
+        }
+    };
+
+    try {
+        const respuesta = await fetch("/api/votos", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(votoCompleto)
+        });
+
+        const data = await respuesta.json();
+
+        if (!respuesta.ok) {
+            alert(data.mensaje || "No se pudo guardar el voto.");
+            return;
+        }
+
+        alert("Voto guardado correctamente en MongoDB.");
+
+        localStorage.clear();
+        window.location.href = "../formulario.html";
+
+    } catch (error) {
+        console.error("Error al guardar el voto:", error);
+        alert("Error al conectar con el servidor.");
+    }
 });

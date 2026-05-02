@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultados de votación</title>
+    <link rel="stylesheet" href="resultados.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="logo-onpe">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQciM-hhfMu2rZwVIHWDBEOoxK3gbAJfnxZCA&s" alt="Logo ONPE">
+    </div>
+    <header>
+        <h1>Resultados de la votación virtual</h1>
+        <p>Panel de consulta tipo ONPE para visualizar cantidad de votantes y preferencias por categoría.</p>
+        <a href="../formulario.html">Registrar nuevo voto</a>
+    </header>
+    <main>
+        <section class="resumen"><h2>Total de votantes registrados</h2><p id="totalVotantes">0</p></section>
+        <section class="graficos">
+            <article><h2>Presidente y vicepresidentes</h2><canvas id="graficoPresidente"></canvas></article>
+            <article><h2>Senador Nacional</h2><canvas id="graficoSenadorNacional"></canvas></article>
+            <article><h2>Senador Lima Metropolitana</h2><canvas id="graficoSenadorLima"></canvas></article>
+            <article><h2>Diputados</h2><canvas id="graficoDiputados"></canvas></article>
+            <article><h2>Parlamento Andino</h2><canvas id="graficoParlamento"></canvas></article>
+        </section>
+        <section class="tabla"><h2>Datos de los votantes</h2><table><thead><tr><th>DNI</th><th>Nombre completo</th><th>Grupo</th><th>Fecha</th></tr></thead><tbody id="tablaVotantes"></tbody></table></section>
+    </main>
+    <script src="resultados.js"></script>
+</body>
+</html>
