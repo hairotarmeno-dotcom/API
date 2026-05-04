@@ -7,6 +7,10 @@ const votoParlamento = JSON.parse(localStorage.getItem("votoParlamento"));
 if (!votante) {
     window.location.href = "../formulario.html";
 }
+if (!votoPresidencial || !votoSenadores || !votoDiputados || !votoParlamento) {
+    alert("Faltan votos por completar. Serás redirigido al inicio.");
+    window.location.href = "../formulario.html";
+}
 
 const datosVotante = document.getElementById("datosVotante");
 const resumenVotos = document.getElementById("resumenVotos");
@@ -79,6 +83,9 @@ if (votoParlamento) {
 }
 
 btnFinalizar.addEventListener("click", async () => {
+    btnFinalizar.disabled = true;
+    btnFinalizar.textContent = "Guardando voto...";
+
     const votoCompleto = {
         votante: votante,
         votos: {
@@ -102,6 +109,8 @@ btnFinalizar.addEventListener("click", async () => {
 
         if (!respuesta.ok) {
             alert(data.mensaje || "No se pudo guardar el voto.");
+            btnFinalizar.disabled = false;
+            btnFinalizar.textContent = "Finalizar";
             return;
         }
 
@@ -113,5 +122,8 @@ btnFinalizar.addEventListener("click", async () => {
     } catch (error) {
         console.error("Error al guardar el voto:", error);
         alert("Error al conectar con el servidor.");
+
+        btnFinalizar.disabled = false;
+        btnFinalizar.textContent = "Finalizar";
     }
 });

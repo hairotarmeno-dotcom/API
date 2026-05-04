@@ -50,3 +50,17 @@ document.getElementById("formRegistro").addEventListener("submit", function(e) {
         window.location.href = "president.html";
     }, 1500);
 });
+
+document.getElementById("dni").addEventListener("input", function() {
+    this.value = this.value.replace(/\D/g, "").slice(0, 8);
+});
+
+document.getElementById("grupo").addEventListener("input", function() {
+    this.value = this.value.replace(/\D/g, "").slice(0, 6);
+});
+
+["nombre", "apellidoP", "apellidoM"].forEach(id => {
+    document.getElementById(id).addEventListener("input", function() {
+        this.value = this.value.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑ\s]/g, "");
+    });
+});

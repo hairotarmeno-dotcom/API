@@ -116,10 +116,10 @@ partidosDiputados.forEach(opcion => {
 
                 <div class="preferencial">
                     <label>Pref. 1:</label>
-                    <input type="number" min="1" max="99">
+                      <input type="number" min="1" max="10" disabled>
 
-                    <label>Pref. 2:</label>
-                    <input type="number" min="1" max="99">
+                      <label>Pref. 2:</label>
+                      <input type="number" min="1" max="10" disabled>
                 </div>
             </div>
 
@@ -139,11 +139,44 @@ partidosDiputados.forEach(opcion => {
 
         tarjeta.classList.add("seleccionado");
         tarjeta.querySelector("input[type='radio']").checked = true;
+
+        document.querySelectorAll("input[name='diputado']").forEach(radio => {
+            const card = radio.closest(".opcion");
+
+            card.querySelectorAll("input[type='number']").forEach(input => {
+                if (card === tarjeta) {
+                    input.disabled = false;
+                } else {
+                    input.disabled = true;
+                    input.value = "";
+                }
+              });
+          });
+
     });
 
     listaDiputados.appendChild(tarjeta);
 });
 
+function limitarPreferencial(input, maximo) {
+    input.value = input.value.replace(/\D/g, "");
+
+    if (input.value === "") return;
+
+    let numero = parseInt(input.value);
+
+    if (numero < 1) {
+        input.value = "";
+    } else if (numero > maximo) {
+        input.value = maximo;
+    }
+}
+
+document.querySelectorAll("input[type='number']").forEach(input => {
+    input.addEventListener("input", () => {
+        limitarPreferencial(input, 10);
+    });
+});
 
 btnConfirmar.addEventListener("click", () => {
 

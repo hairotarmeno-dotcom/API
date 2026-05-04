@@ -120,13 +120,18 @@ function mostrarOpciones(lista, contenedor, tipoVoto) {
 
                     <div class="preferencial">
                         <label>Pref. 1:</label>
-                        <input type="number" min="1" max="99">
+                        <input 
+                            type="number" 
+                            min="1" 
+                            max="${tipoVoto === "senadorNacional" ? "10" : "5"}" 
+                            disabled
+                        >
 
                         ${
                         tipoVoto === "senadorNacional"
                         ? `
                             <label>Pref. 2:</label>
-                            <input type="number" min="1" max="99">
+                            <input type="number" min="1" max="10" disabled>
                         `
                         : ""
                         }
@@ -152,6 +157,20 @@ function mostrarOpciones(lista, contenedor, tipoVoto) {
 
             tarjeta.classList.add("seleccionado");
             tarjeta.querySelector("input").checked = true;
+            
+            document.querySelectorAll(`input[name='${tipoVoto}']`).forEach(radio => {
+              const card = radio.closest(".opcion");
+
+              card.querySelectorAll("input[type='number']").forEach(input => {
+                  if (card === tarjeta) {
+                      input.disabled = false;
+                  } else {
+                      input.disabled = true;
+                      input.value = "";
+                  }
+                });
+            });
+
         });
 
         contenedor.appendChild(tarjeta);
@@ -160,6 +179,46 @@ function mostrarOpciones(lista, contenedor, tipoVoto) {
 
 mostrarOpciones(senadoresNacional, listaNacional, "senadorNacional");
 mostrarOpciones(senadoresLima, listaLima, "senadorLima");
+
+function limitarPreferencial(input, maximo) {
+    input.value = input.value.replace(/\D/g, "");
+
+    if (input.value === "") return;
+
+    let numero = parseInt(input.value);
+
+    if (numero < 1) {
+        input.value = "";
+    } else if (numero > maximo) {
+        input.value = maximo;
+    }
+}
+
+document.querySelectorAll("input[type='number']").forEach(input => {
+    input.addEventListener("input", () => {
+        const card = input.closest(".opcion");
+        const radio = card.querySelector("input[type='radio']");
+        const maximo = radio.name === "senadorNacional" ? 10 : 5;
+
+        limitarPreferencial(input, maximo);
+    });
+});
+
+document.querySelectorAll("input[type='number']").forEach(input => {
+    input.addEventListener("input", () => {
+        input.value = input.value.replace(/\D/g, "");
+
+        if (input.value === "") return;
+
+        let numero = parseInt(input.value);
+
+        if (numero < 1) {
+            input.value = "";
+        } else if (numero > 10) {
+            input.value = "10";
+        }
+    });
+});
 
 btnConfirmar.addEventListener("click", () => {
 
