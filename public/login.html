@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Acceso Presidente de Mesa
+    </title>
+
+    <link rel="stylesheet"
+          href="login.css">
+
+</head>
+
+<body>
+
+    <!-- FONDO OSCURECIDO -->
+    <div class="overlay"></div>
+
+    <!-- LOGO -->
+    <div class="logo-onpe">
+
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQciM-hhfMu2rZwVIHWDBEOoxK3gbAJfnxZCA&s"
+             alt="Logo ONPE">
+
+    </div>
+
+    <!-- CONTENEDOR LOGIN -->
+    <div class="login-container">
+
+        <h1>
+            🗳️ Presidente de Mesa
+        </h1>
+
+        <p>
+            Sistema de Gestión Electoral
+        </p>
+
+        <form id="formLogin">
+
+            <div class="campo">
+
+                <label>
+                    Usuario
+                </label>
+
+                <input type="text"
+                       id="usuario"
+                       placeholder="Ingrese usuario">
+
+            </div>
+
+            <div class="campo">
+
+                <label>
+                    Contraseña
+                </label>
+
+                <input type="password"
+                       id="password"
+                       placeholder="Ingrese contraseña">
+
+            </div>
+
+            <button type="submit"
+                    class="btn-login">
+                Ingresar
+            </button>
+
+            <button type="button"
+                id="btnGoogle"
+                class="btn-google">
+                Ingresar con Google
+            </button>
+
+        </form>
+
+        <p id="mensajeError"></p>
+
+    </div>
+
+    <!-- FIREBASE -->
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+
+    <script type="module"
+        src="login.js">
+    </script>
+
+</body>
+</html>
