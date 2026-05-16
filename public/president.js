@@ -1,219 +1,485 @@
-const votante = JSON.parse(localStorage.getItem("votante"));
+const votante =
+    JSON.parse(localStorage.getItem("votanteSeleccionado"))
+    ||
+    JSON.parse(localStorage.getItem("votante"));
 
 if (!votante) {
+
     window.location.href = "formulario.html";
 }
 
-document.getElementById("datosVotante").textContent =
-    `Votante: ${votante.nombre} ${votante.apellidoP} ${votante.apellidoM} | DNI: ${votante.dni}`;
+const datosContenedor =
+      document.getElementById("datosVotante");
 
-const candidatos = [
-  {
-    id: 1,
-    nombre: "PABLO ALFONSO LOPEZ CHAU NAVA",
-    vicepresidentes: "Luis Villanueva y Ruth Buendia",
-    partido: "Ahora Nación - AN",
-    logo: "img_candidatos/logo1.jpeg",
-    foto: "img_partido/candidato1.jpg"
-  },
-  {
-    id: 2,
-    nombre: "RICARDO PABLO BELMONT CASSINELLI",
-    vicepresidentes: "Daniel Barragan y Dina Hancco",
-    partido: "Partido Cívico Obras",
-    logo: "img_candidatos/logo2.jpeg",
-    foto: "img_partido/candidato2.jpg"
-  },
-  {
-    id: 3,
-    nombre: "JORGE NIETO MONTESINOS",
-    vicepresidentes: "Susana Matute y Carlos Caballero",
-    partido: "Partido del Buen Gobierno",
-    logo: "img_candidatos/logo3.jpeg",
-    foto: "img_partido/candidato3.jpg"
-  },
-  {
-    id: 4,
-    nombre: "WOLFGANG MARIO GROZO COSTA",
-    vicepresidentes: "Bertha Azabache y Wellington Prada",
-    partido: "Partido Político Integridad Democrática",
-    logo: "img_candidatos/logo4.jpeg",
-    foto: "img_partido/candidato4.jpg"
-  },
-  {
-    id: 5,
-    nombre: "ALFONSO CARLOS ESPA Y GARCES-ALVEAR",
-    vicepresidentes: "Alejandro Santa Maria y Melitza Yanzich",
-    partido: "Partido Sicreo",
-    logo: "img_candidatos/logo5.jpeg",
-    foto: "img_partido/candidato5.jpg"
-  },
-  {
-    id: 6,
-    nombre: "LUIS FERNANDO OLIVERA VEGA",
-    vicepresidentes: "Elizabeth del Rosario y Carlos Cuaresma",
-    partido: "Partido Frente de la Esperanza 2021",
-    logo: "img_candidatos/logo6.jpeg",
-    foto: "img_partido/candidato6.jpg"
-  },
-  {
-    id: 7,
-    nombre: "RAFAEL BERNARDO LÓPEZ ALIAGA CAZORLA",
-    vicepresidentes: "Norma Martina y Jhon Ramos",
-    partido: "Renovación Popular",
-    logo: "img_candidatos/logo7.jpeg",
-    foto: "img_partido/candidato7.jpg"
-  },
-  {
-    id: 8,
-    nombre: "KEIKO SOFIA FUJIMORI HIGUCHI",
-    vicepresidentes: "Luis Galareta y Miguel Torres",
-    partido: "Fuerza Popular",
-    logo: "img_candidatos/logo8.jpeg",
-    foto: "img_partido/candidato8.jpg"
-  },
-  {
-    id: 9,
-    nombre: "CESAR ACUÑA PERALTA",
-    vicepresidentes: "Jessica Tumi y Alejandro Soto",
-    partido: "Alianza para el Progreso",
-    logo: "img_candidatos/logo9.jpeg",
-    foto: "img_partido/candidato9.jpg"
-  },
-  {
-    id: 10,
-    nombre: "ALVARO GONZALO PAZ DE LA BARRA FREIGEIRO",
-    vicepresidentes: "Yessika Arteaga y Shellah Palacios",
-    partido: "Fe en el Perú",
-    logo: "img_candidatos/logo10.jpeg",
-    foto: "img_partido/candidato10.jpg"
-  },
-  {
-    id: 11,
-    nombre: "JOSE DANIEL WILLIAMS ZAPATA",
-    vicepresidentes: "Fernan Altuve y Adriana Tudela",
-    partido: "Avanza País - Partido de Integración Social",
-    logo: "img_candidatos/logo11.jpeg",
-    foto: "img_partido/candidato11.jpg"
-  },
-  {
-    id: 12,
-    nombre: "PITTER ENRIQUE VALDERRAMA PEÑA",
-    vicepresidentes: "Maria Valdivia y Lucio Vasquez",
-    partido: "Partido Aprista Peruano",
-    logo: "img_candidatos/logo12.jpeg",
-    foto: "img_partido/candidato12.jpg"
-  },
-  {
-    id: 13,
-    nombre: "CARLOS GONSALO ALVAREZ LOAYZA",
-    vicepresidentes: "Maria Chambizea y Diego Guevara",
-    partido: "Partido País para Todos",
-    logo: "img_candidatos/logo13.jpeg",
-    foto: "img_partido/candidato13.jpg"
-  },
-  {
-    id: 14,
-    nombre: "MARIA SOLEDAD PEREZ TELLO DE RODRIGUEZ",
-    vicepresidentes: "Raul Molina y Manuel Ato del Avellanal",
-    partido: "Primero la Gente - Comunidad, Ecología, Libertad y Progreso",
-    logo: "img_candidatos/logo14.jpeg",
-    foto: "img_partido/candidato14.jpg"
-  },
-  {
-    id: 16,
-    nombre: "Voto en blanco",
-    tipo: "blanco"
-  }
-];
+if (datosContenedor) {
 
-const listaCandidatos = document.getElementById("listaCandidatos");
-const btnConfirmar = document.getElementById("btnConfirmar");
-const btnSiguiente = document.getElementById("btnSiguiente");
-const mensaje = document.getElementById("mensaje");
+    datosContenedor.textContent =
+        `Votante:
+        ${votante.nombres || votante.nombre || ""}
+        ${votante.apellidos || votante.apellidoP || ""}
+        | DNI: ${votante.dni || ""}`;
+}
+
+const listaCandidatos =
+      document.getElementById("listaCandidatos");
+
+const btnConfirmar =
+      document.getElementById("btnConfirmar");
+
+const btnSiguiente =
+      document.getElementById("btnSiguiente");
+
+const mensaje =
+      document.getElementById("mensaje");
 
 let candidatoSeleccionado = null;
 
-candidatos.forEach(candidato => {
-  const tarjeta = document.createElement("div");
-  tarjeta.classList.add("candidato");
+let indiceActual = -1;
 
-  if (candidato.tipo === "blanco") {
-    tarjeta.classList.add("voto-blanco");
+let votoConfirmado = false;
 
-    tarjeta.innerHTML = `
-      <div class="info">
-        <h2>VOTO EN BLANCO</h2>
-      </div>
-      <input type="radio" name="voto" value="${candidato.id}">
-    `;
-  } 
-  
-  else {
-    tarjeta.innerHTML = `
-      <img src="${candidato.logo}" class="logo">
+let timerInstruccion = null;
 
-      <div class="info">
-        <h3>${candidato.partido}</h3>
-        <p><strong>${candidato.nombre}</strong></p>
-        <p>${candidato.vicepresidentes}</p>
-      </div>
+const candidatos = [
 
-      <img src="${candidato.foto}" class="foto">
+  {
+    id:1,
+    nombre:"PABLO ALFONSO LOPEZ CHAU NAVA",
+    vicepresidentes:"Luis Villanueva y Ruth Buendia",
+    partido:"Ahora Nación - AN",
+    logo:"img_candidatos/logo1.jpeg",
+    foto:"img_partido/candidato1.jpg"
+  },
 
-      <input type="radio" name="voto" value="${candidato.id}">
-    `;
+  {
+    id:2,
+    nombre:"RICARDO PABLO BELMONT CASSINELLI",
+    vicepresidentes:"Daniel Barragan y Dina Hancco",
+    partido:"Partido Cívico Obras",
+    logo:"img_candidatos/logo2.jpeg",
+    foto:"img_partido/candidato2.jpg"
+  },
+
+  {
+    id:15,
+    nombre:"VOTO EN BLANCO",
+    tipo:"blanco"
   }
+];
 
-  tarjeta.addEventListener("click", () => {
-    candidatoSeleccionado = candidato;
 
-    document.querySelectorAll(".candidato").forEach(card => {
-      card.classList.remove("seleccionado");
-    });
+function hablar(texto, velocidad = 0.95){
 
-    tarjeta.classList.add("seleccionado");
-    tarjeta.querySelector("input").checked = true;
-  });
+    window.speechSynthesis.cancel();
 
-  listaCandidatos.appendChild(tarjeta);
-});
+    const voz =
+          new SpeechSynthesisUtterance(texto);
 
-btnConfirmar.addEventListener("click", () => {
+    voz.lang = "es-PE";
 
-    if (candidatoSeleccionado === null) {
-        mensaje.textContent = "Debes seleccionar un candidato antes de confirmar.";
-        mensaje.style.color = "red";
+    voz.rate = velocidad;
+
+    window.speechSynthesis.speak(voz);
+}
+
+
+function leerCandidato(candidato){
+
+    if(candidato.tipo === "blanco"){
+
+        hablar("Voto en blanco.");
+
         return;
     }
 
-    const votante = JSON.parse(localStorage.getItem("votante"));
+    hablar(
+        `Candidato:
+        ${candidato.nombre}.
+        Partido político:
+        ${candidato.partido}.`
+    );
+}
 
-    const voto = {
-        dni: votante.dni,
-        nombre: `${votante.nombre} ${votante.apellidoP} ${votante.apellidoM}`,
-        grupo: votante.grupo,
-        candidato: candidatoSeleccionado,
-        fecha: new Date().toLocaleString()
-    };
 
-    localStorage.setItem("votoPresidencial", JSON.stringify(voto));
+setTimeout(() => {
 
-    mensaje.textContent = `Voto registrado para: ${candidatoSeleccionado.nombre}`;
-    mensaje.style.color = "green";
+    hablar(
+        `Cédula presidencial asistida.
+        Use flecha arriba y abajo
+        para recorrer candidatos.
+        Presione Enter para seleccionar.
+        Presione espacio para confirmar voto.`
+    );
 
-    document.querySelectorAll("input[name='voto']").forEach(radio => {
-        radio.disabled = true;
+}, 1000);
+
+
+function renderizarCandidatos(){
+
+    if(!listaCandidatos) return;
+
+    listaCandidatos.innerHTML = "";
+
+    const fragmento =
+          document.createDocumentFragment();
+
+    candidatos.forEach(candidato => {
+
+        const tarjeta =
+              document.createElement("div");
+
+        tarjeta.classList.add("candidato");
+
+        if(candidato.tipo === "blanco"){
+
+            tarjeta.classList.add("voto-blanco");
+
+            tarjeta.innerHTML = `
+                <div class="info">
+
+                    <h2>
+                        VOTO EN BLANCO
+                    </h2>
+
+                </div>
+
+                <input type="radio"
+                       name="voto">
+            `;
+
+        }else{
+
+            tarjeta.innerHTML = `
+                <img src="${candidato.logo}"
+                     class="logo">
+
+                <div class="info">
+
+                    <h3>
+                        ${candidato.partido}
+                    </h3>
+
+                    <p>
+                        <strong>
+                            ${candidato.nombre}
+                        </strong>
+                    </p>
+
+                    <p>
+                        ${candidato.vicepresidentes}
+                    </p>
+
+                </div>
+
+                <img src="${candidato.foto}"
+                     class="foto">
+
+                <input type="radio"
+                       name="voto">
+            `;
+        }
+
+        tarjeta.addEventListener("click", () => {
+
+            if(votoConfirmado) return;
+
+            seleccionarCandidato(
+                candidato,
+                tarjeta
+            );
+        });
+
+        fragmento.appendChild(tarjeta);
     });
 
-    document.querySelectorAll(".candidato").forEach(card => {
+    listaCandidatos.appendChild(fragmento);
+}
+
+
+function seleccionarCandidato(
+    candidato,
+    tarjeta
+){
+
+    candidatoSeleccionado = candidato;
+
+    document
+    .querySelectorAll(".candidato")
+
+    .forEach(card => {
+
+        card.classList.remove("seleccionado");
+
+        card.style.opacity = "0.5";
+
+        card.style.border = "none";
+
+        const radio =
+              card.querySelector("input");
+
+        if(radio){
+
+            radio.checked = false;
+        }
+    });
+
+    tarjeta.classList.add("seleccionado");
+
+    tarjeta.style.opacity = "1";
+
+    tarjeta.style.border =
+        "3px solid #1e3a8a";
+
+    const radio =
+          tarjeta.querySelector("input");
+
+    if(radio){
+
+        radio.checked = true;
+    }
+
+    leerCandidato(candidato);
+
+    clearTimeout(timerInstruccion);
+
+    timerInstruccion = setTimeout(() => {
+
+        hablar(
+            `Opción seleccionada.
+            Presione espacio para confirmar voto.`
+        );
+
+    }, 1800);
+}
+
+
+function confirmarVoto(){
+
+    if(votoConfirmado) return;
+
+    if(!candidatoSeleccionado){
+
+        hablar(
+            `Seleccione un candidato
+            antes de continuar.`
+        );
+
+        return;
+    }
+
+    votoConfirmado = true;
+
+    const voto = {
+
+        dni: votante.dni,
+
+        nombre:
+            `${votante.nombres || votante.nombre || ""}
+            ${votante.apellidos || votante.apellidoP || ""}`,
+
+        grupo:
+            votante.grupo || "B",
+
+        candidato:
+            candidatoSeleccionado,
+
+        fecha:
+            new Date().toLocaleString()
+    };
+
+    localStorage.setItem(
+        "votoPresidencial",
+        JSON.stringify(voto)
+    );
+
+    if(mensaje){
+
+        mensaje.style.color = "green";
+
+        mensaje.textContent =
+            candidatoSeleccionado.tipo === "blanco"
+            ?
+            "Voto en blanco registrado."
+            :
+            `Voto registrado para:
+             ${candidatoSeleccionado.nombre}`;
+    }
+
+    hablar(
+        `Voto presidencial registrado
+        correctamente.
+        Avanzando a senadores.`
+    );
+
+    document
+    .querySelectorAll(".candidato")
+
+    .forEach(card => {
+
         card.style.pointerEvents = "none";
     });
 
-    btnSiguiente.style.display = "block";
-    btnConfirmar.style.display = "none";
+    if(btnConfirmar){
+
+        btnConfirmar.style.display = "none";
+    }
+
+    if(btnSiguiente){
+
+        btnSiguiente.style.display = "block";
+    }
+
+    setTimeout(() => {
+
+        window.location.href =
+            "Senadores/senadores.html";
+
+    }, 3500);
+}
+
+
+if(btnConfirmar){
+
+    btnConfirmar.addEventListener(
+        "click",
+        confirmarVoto
+    );
+}
+
+if(btnSiguiente){
+
+    btnSiguiente.addEventListener(
+        "click",
+
+        () => {
+
+            window.location.href =
+                "Senadores/senadores.html";
+        }
+    );
+}
+
+
+document.addEventListener("keydown", e => {
+
+    if(votoConfirmado) return;
+
+    const tarjetas =
+          document.querySelectorAll(".candidato");
+
+    if(e.key === "ArrowDown"){
+
+        e.preventDefault();
+
+        if(indiceActual < candidatos.length - 1){
+
+            indiceActual++;
+
+            tarjetas[indiceActual]
+                .scrollIntoView({
+
+                    behavior:"smooth",
+
+                    block:"center"
+                });
+
+            leerCandidato(
+                candidatos[indiceActual]
+            );
+
+            tarjetas.forEach(card => {
+
+                card.style.border = "none";
+            });
+
+            tarjetas[indiceActual]
+                .style.border =
+                    "3px solid #1e3a8a";
+        }
+    }
+
+    if(e.key === "ArrowUp"){
+
+        e.preventDefault();
+
+        if(indiceActual > 0){
+
+            indiceActual--;
+
+            tarjetas[indiceActual]
+                .scrollIntoView({
+
+                    behavior:"smooth",
+
+                    block:"center"
+                });
+
+            leerCandidato(
+                candidatos[indiceActual]
+            );
+
+            tarjetas.forEach(card => {
+
+                card.style.border = "none";
+            });
+
+            tarjetas[indiceActual]
+                .style.border =
+                    "3px solid #1e3a8a";
+        }
+    }
+
+    if(e.key === "Enter"){
+
+        e.preventDefault();
+
+        if(
+            indiceActual >= 0
+            &&
+            indiceActual < candidatos.length
+        ){
+
+            seleccionarCandidato(
+
+                candidatos[indiceActual],
+
+                tarjetas[indiceActual]
+            );
+        }
+    }
+
+    if(
+        e.key === " "
+        ||
+        e.code === "Space"
+    ){
+
+        e.preventDefault();
+
+        confirmarVoto();
+    }
+
+}, true);
+
+
+document
+.querySelectorAll("input, button, a")
+
+.forEach(el => {
+
+    el.setAttribute("tabindex", "-1");
 });
 
-btnSiguiente.addEventListener("click", () => {
-    window.location.href = "Senadores/senadores.html";
+document.addEventListener("focusin", e => {
+
+    if(
+        e.target
+        &&
+        typeof e.target.blur === "function"
+    ){
+
+        e.target.blur();
+    }
 });
+
+renderizarCandidatos();

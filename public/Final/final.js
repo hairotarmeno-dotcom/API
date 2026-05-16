@@ -116,8 +116,19 @@ btnFinalizar.addEventListener("click", async () => {
 
         alert("Voto guardado correctamente. ¡Gracias por participar!");
 
-        localStorage.clear();
-        window.location.href = "../formulario.html";
+        localStorage.removeItem("votante");
+
+        localStorage.removeItem("votanteSeleccionado");
+
+        localStorage.removeItem("votoPresidencial");
+
+        localStorage.removeItem("votoSenadores");
+
+        localStorage.removeItem("votoDiputados");
+
+        localStorage.removeItem("votoParlamento");
+
+        window.location.href = "../habilitarmesa.html";
 
     } catch (error) {
         console.error("Error al guardar el voto:", error);

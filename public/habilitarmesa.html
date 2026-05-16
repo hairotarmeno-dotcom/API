@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet"
+        href="./habilitarmesa.css">
+
+  <title>Panel Miembro de Mesa</title>
+</head>
+
+<body>
+
+  <!-- MODAL SUPERIOR -->
+  <div id="modalMesa" class="modal-mesa">
+
+      <div class="contenido-modal">
+
+          <div class="contenido-modal">
+
+            <div class="modal-info">
+
+                <h2>
+                    🗳️ Control de Mesa Electoral
+                </h2>
+
+                <p id="estadoMesaTexto">
+                    Mesa Cerrada
+                </p>
+
+            </div>
+
+            <div class="botones-modal">
+
+                <button class="btn abrir"
+                        onclick="abrirMesa()">
+
+                    Aperturar Mesa
+                </button>
+
+                <button class="btn cerrar"
+                        onclick="cerrarMesa()">
+
+                    Cerrar Mesa
+                </button>
+
+                <button class="btn salir"
+                        onclick="cerrarPanelMesa()">
+
+                    Ocultar Panel
+                </button>
+
+            </div>
+
+        </div>
+
+      </div>
+
+  </div>
+
+  <!-- LOGO ONPE -->
+  <div class="logo-onpe">
+
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQciM-hhfMu2rZwVIHWDBEOoxK3gbAJfnxZCA&s"
+         alt="Logo ONPE">
+
+  </div>
+
+  <!-- HEADER -->
+  <div class="header">
+
+    <h1>🗳️ Panel Presidente de Mesa</h1>
+
+    <div class="header-derecha">
+
+      <div class="estado"
+           id="estadoMesa">
+
+           Mesa Cerrada
+      </div>
+
+      <button id="btnMesa"
+              onclick="abrirPanelMesa()">
+
+          MESA
+      </button>
+
+    </div>
+
+  </div>
+
+  <!-- CONTENIDO -->
+  <div class="contenedor">
+
+    <!-- LISTA -->
+    <header class="lista-header">
+
+      <h2>Lista de Votantes</h2>
+
+    </header>
+
+    <main>
+
+      <div class="tabla-contenedor">
+
+        <!-- GRUPO A -->
+        <div class="grupo-bloque">
+
+          <h2 class="grupo-titulo">
+            Grupo A - Votantes Generales
+          </h2>
+
+          <div id="votantesGrupoA"></div>
+
+        </div>
+
+        <!-- GRUPO B -->
+        <div class="grupo-bloque"
+             style="margin-top:25px;">
+
+          <h2 class="grupo-titulo discapacidad-tit">
+
+            Grupo B - Votantes con Discapacidad
+            (Ayuda de voz activa)
+
+          </h2>
+
+          <div id="votantesGrupoB"></div>
+
+        </div>
+
+      </div>
+
+      <!-- CONTROLES -->
+      <div class="controles-finales">
+
+        <button id="btnConfirmar">
+          Confirmar Votante
+        </button>
+
+      </div>
+
+    </main>
+
+  </div>
+
+    <script type="module"
+        src="./habilitarmesa.js">
+    </script>
+
+</body>
+</html>

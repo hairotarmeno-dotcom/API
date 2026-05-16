@@ -19,10 +19,10 @@
 
 <body>
 
-    <!-- FONDO OSCURECIDO -->
+    <!-- CAPA OSCURA -->
     <div class="overlay"></div>
 
-    <!-- LOGO -->
+    <!-- LOGO ONPE -->
     <div class="logo-onpe">
 
         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQciM-hhfMu2rZwVIHWDBEOoxK3gbAJfnxZCA&s"
@@ -30,67 +30,50 @@
 
     </div>
 
-    <!-- CONTENEDOR LOGIN -->
+    <!-- CONTENEDOR -->
     <div class="login-container">
 
         <h1>
             🗳️ Presidente de Mesa
         </h1>
 
-        <p>
+        <p class="subtitulo">
+
             Sistema de Gestión Electoral
+
         </p>
 
-        <form id="formLogin">
-
-            <div class="campo">
-
-                <label>
-                    Usuario
-                </label>
-
-                <input type="text"
-                       id="usuario"
-                       placeholder="Ingrese usuario">
-
-            </div>
-
-            <div class="campo">
-
-                <label>
-                    Contraseña
-                </label>
-
-                <input type="password"
-                       id="password"
-                       placeholder="Ingrese contraseña">
-
-            </div>
-
-            <button type="submit"
-                    class="btn-login">
-                Ingresar
-            </button>
+        <div class="contenedor-google">
 
             <button type="button"
-                id="btnGoogle"
-                class="btn-google">
-                Ingresar con Google
+                    id="btnGoogle"
+                    class="btn-google">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg"
+                    alt="Google">
+                <span>
+                    Continuar con Google
+                </span>
             </button>
 
-        </form>
+        </div>
+
+        <p class="info-login">
+
+            Solo los correos autorizados podrán
+            administrar la mesa electoral.
+
+        </p>
 
         <p id="mensajeError"></p>
 
     </div>
 
-    <!-- FIREBASE -->
-    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
-
+    <!-- LOGIN -->
     <script type="module"
-        src="login.js">
+            src="login.js">
+
     </script>
 
 </body>
+
 </html>

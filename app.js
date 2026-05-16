@@ -11,7 +11,6 @@ const DB_NAME = process.env.DB_NAME || "cedula_votacion";
 
 app.use(cors());
 app.use(express.json());
-app.use(express.static(path.join(__dirname, "public")));
 
 let db;
 let votosCollection;
@@ -33,8 +32,13 @@ async function conectarMongo() {
 }
 
 app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, "public", "formulario.html"));
+
+    res.sendFile(
+        path.join(__dirname, "public", "login.html")
+    );
 });
+
+app.use(express.static(path.join(__dirname, "public")));
 
 app.get("/api/estado", (req, res) => {
     res.json({ mensaje: "API de cédula virtual funcionando" });

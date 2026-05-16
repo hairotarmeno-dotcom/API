@@ -1,7 +1,3 @@
-// =========================
-// IMPORTAR FIREBASE
-// =========================
-
 import { initializeApp }
 from "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js";
 
@@ -16,9 +12,6 @@ import {
 }
 from "https://www.gstatic.com/firebasejs/12.13.0/firebase-auth.js";
 
-// =========================
-// CONFIG FIREBASE
-// =========================
 
 const firebaseConfig = {
 
@@ -72,14 +65,31 @@ btnGoogle.addEventListener(
 
             const correosAutorizados = [
 
-                "adminonpe@gmail.com"
+                "gosthmeits.024@gmail.com"
             ];
 
             const esAdministrador =
-
+                            
                 correosAutorizados.includes(
                     usuario.email
                 );
+
+            if(esAdministrador){
+
+                const pin =
+                    prompt(
+                        "Ingrese código de verificación institucional"
+                    );
+
+                if(pin !== "2026"){
+
+                    alert(
+                        "Código incorrecto."
+                    );
+
+                    return;
+                }
+            }
 
             localStorage.setItem(
 

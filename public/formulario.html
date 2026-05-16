@@ -32,7 +32,11 @@
                     <input type="text" id="nombre" placeholder="Nombre">
                     <input type="text" id="apellidoP" placeholder="Apellido Paterno">
                     <input type="text" id="apellidoM" placeholder="Apellido Materno">
-                    <input type="number" id="grupo" placeholder="Grupo de Votación" oninput="this.value = this.value.slice(0,6)">
+                    <input type="password"
+                            id="numeroSeguridad"
+                            placeholder="Número de verificación DNI"
+                            maxlength="1">
+                    
                     <button type="submit">Comenzar con el sufragio</button>
                 </form>
                 <div class="mensaje" id="mensaje"></div>
@@ -41,7 +45,9 @@
 
     </div>
 
-    <script src="formulario.js"></script>
+    <script type="module"
+        src="formulario.js">
+    </script>
 
 </body>
 </html>
